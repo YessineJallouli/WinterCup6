@@ -35,13 +35,14 @@ $$
 Trivial
 ### 2.2 Case 2
 Let $\displaystyle C\rightarrow^{i,j}C'$
-- If $i=0\vee j=0$, Then $G[C']=2$
-- Else, $G[C']=0.$ It is guaranteed that there exists such $C'$
-In any case, this implies $G[C]=1$
+- If $i=0\vee j=0$, Then $G(C')=2$
+- Else, $G(C')=0.$ It is guaranteed that there exists such $C'$
+In any case, this implies $G(C)=1$
 ### 2.3 Case 3
+We have $n$ is odd, so that $C[0]=n-2\ge 1$
 Let $\displaystyle C\rightarrow^{i,j}C'$
-- If $i=0\vee j=0$, Then $G[C']=1$
-- Else, $G[C']=0.$
+- If $i=0\vee j=0$, Then $G(C')=1$
+- Else, $G(C')=0.$
 Both cases are guaranteed to exist. This implies $G[C]=2$
 
 ### 2.4 Case 4

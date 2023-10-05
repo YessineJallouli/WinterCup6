@@ -11,7 +11,7 @@ Determine the winner of the game if both players play optimally. It's guaranteed
 
 **Input**
 
-The first line of the input contains two integers $n$ $(1 \le n \le 10^{5})$ and an **odd** number $k$ $(1 \le k \le 10^9)$
+The first line of the input contains two integers $n$ $(1 \le n \le 10)$ and an **odd** number $k$ $(1 \le k \le 10^9)$
 
 The second line contains $n$ integers, the elements of the array $a_{i}$ $(1 \le a_{i} \le 10^9)$
 

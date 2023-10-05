@@ -85,7 +85,7 @@ int main()
             C[a%k]++;
         std::cout << grundy(C) << std::endl;
     }
-    else while(retrial--) for(int r=2;r<=n;r++) for(int m=k;m>=2 ;m-=2)
+    else while(retrial--) for(int r=2;r<=n;r++) for(int m=k;m>=2 ;m-=4)
     {
         std::vector<int> A(r);
         std::uniform_int_distribution d(0,m-1);
