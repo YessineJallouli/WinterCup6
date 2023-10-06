@@ -18,7 +18,7 @@ int main()
         for(auto &a:A) std::cin >> a;
         int r=0;
         for(auto a:A) if(a%k==0)
-                r++;
+            r++;
         bool yessine_wins =  r==n-2
                              || (r<n-2 && n%2==0);
         std::cout << (yessine_wins?"Yessine":"Rami") << '\n';
