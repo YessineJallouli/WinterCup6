@@ -1,17 +1,43 @@
 #### Construct the tree : 
 
-Yessine would like to construct a tree with $n$ vertices, indexed from $1$ to $n$. For this, he have $n$ informations about the tree :
+Yessine would like to construct a tree with $n$ vertices, indexed from $1$ to $n$. For this, he have $n$ details about the tree :
 
-For each node $i$ $(1 \le i \le n)$, he know one of the furthest node from node $i$.
+For each node $i$ $(1 \le i \le n)$, he knows one of the furthest node from node $i$.
 
-Construct any tree satisfying those $n$ informations, if there is no answer, print $-1$.
+Your task is to check if there is any construction satisfying those $n$ details.
 
 **Input**
 
 The first line in the input contains one integer $n$ — the number of vertices in the tree $(2 \le n \le 10^{5})$ 
 
-Each of the next $n$ lines contains one integer $v_{i}$ — the furthest node from node $i$ $(1 \le v_{i} \le n)$
+The second line contains $n$ integer $v_{i}$ — the furthest node from node $i$ $(1 \le v_{i} \le n)$
 
 **Output**
 
-Print $n-1$ lines,  each line containing a description of an edge of the tree — a pair of positive integers $x_{i},y_{i}$,which means that the $i$th edge connects vertices $x_{i}$ and $y_{i}$.
+Print "YES" if you can construct the tree and "NO" otherwise.
+
+**Input**
+
+```
+5
+4 5 2 2 2
+```
+
+**Output**
+
+```
+YES
+```
+
+**Input**
+
+```
+5
+5 2 1 3 2
+```
+
+**Output**
+
+```
+NO
+```
