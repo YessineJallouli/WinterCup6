@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.26)
+project(GridCrash)
+
+set(CMAKE_CXX_STANDARD 17)
+add_executable(GridCrashSolution solution.cpp)
+add_executable(GridCrashBFS solution.cpp)
+add_executable(GridCrashHeuristic solution.cpp)
+
+target_compile_definitions(GridCrashSolution PUBLIC TIMER_ON)
+target_compile_definitions(GridCrashBFS PUBLIC TIMER_ON)
+target_compile_definitions(GridCrashHeuristic PUBLIC TIMER_ON)
+target_compile_definitions(GridCrashSolution PUBLIC COLOUR_HEURISTIC)
+target_compile_definitions(GridCrashHeuristic PUBLIC CLUSTER_HEURISTIC)
