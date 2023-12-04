@@ -519,6 +519,34 @@ struct GridClusterHeuristic
     }
 };
 
+struct GridCombinedHeuristic
+{
+    Grid grid;
+    double h=0;
+    int c=0;
+    inline static constexpr double theta=0.1;
+    GridCombinedHeuristic(Grid _grid,int cost=0):grid(std::move(_grid)),c(cost)
+    {
+        std::set<char> S;
+        for(int i=0;i<grid.n;i++) for(int j=0;j<grid.m;j++) if(grid.grid[i][j])
+                    S.emplace(grid.grid[i][j]);
+        h=std::cos(theta)* S.size()+ std::sin(theta)*grid.actions().size();
+    }
+    bool operator<(const GridCombinedHeuristic&b) const
+    {
+        return (h+c)<(b.h+b.c);
+    }
+
+    bool operator>(const GridCombinedHeuristic&b) const
+    {
+        return (h+c)>(b.h+b.c);
+    }
+    [[nodiscard]] double value() const
+    {
+        return h;
+    }
+};
+
 template<typename Heuristic>
 int fewest_moves_heuristic(Grid G)
 {
@@ -600,6 +628,8 @@ GridMoves fewest_moves_heuristic_sequence(Grid G)
 using Heuristic=GridClusterHeuristic;
 #elif defined COLOUR_HEURISTIC
 using Heuristic=GridColoursHeuristic;
+#elif defined COMBINED_HEURISTIC
+using Heuristic=GridCombinedHeuristic;
 #else
 using Heuristic=void;
 #endif

@@ -7,6 +7,7 @@
 #include <set>
 #include <numeric>
 #include <cmath>
+#include <cstdint>
 
 using natural = std::uint64_t;
 using integer = std::int64_t;

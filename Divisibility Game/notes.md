@@ -80,3 +80,55 @@ With that, we have by force $G(C)=0$
 
 ### 2.6 Base Case
 The base case is $n=1.$ Which is trivial
+
+
+- Let $N$ the size of the queries
+- Let $B$ the size of the block
+- Let $B_i$ be the $i^\text{th}$ block
+- Let $t_k$ be the $k^\text{th}$ timestamp
+- Let $Q$ be the number of queries
+- Let $U$ be the number of updates
+- Let $C(X)$ be the cost of a group $X$ of instructions
+
+$$
+\begin{align*}
+C(B_i,B_j,t_k)&= B \\
+C(B_i,B_j) &=\sum_{k}C(B_i,B_j,t_k) B= U\cdot B \\
+C(B_i)&=\sum_{j\ge i}C(B_i,B_j)+(j-i)B=(\tfrac{N}{B}-i)U\cdot B + \tfrac{1}{2}(\tfrac{N}{B}-i)(\tfrac{N}{B}-i-1) B \\
+C&= \sum_{i}C(B_i) + 1= \sum_{i} {i \choose 1}UB + {i \choose 2}  B+\frac{N}{B} \\
+&= UB{\tfrac{N}{B}\choose 2} + B {\tfrac{N}{B} \choose 3} + \frac{N}{B} \\
+&= \alpha \frac{UN^2}{B} + \beta\frac{N^3}{B^2} + \gamma \frac{N}{B} \\
+&=\alpha' \frac{N^3}{B} + \beta\frac{N^3}{B^2} + \gamma \frac{N}{B} \\
+&=\alpha' \frac{N^3}{B} +  \beta \frac{N}{B^2}\\
+\frac{\partial C}{\partial B}&=-\alpha' \frac{N^3}{B^2} - \beta'\frac{N}{B^3}\\
+\frac{\partial C}{\partial B} = 0 &\iff \alpha' BN^3+\beta' N=0 \\
+&\iff B = \left(\frac{}{}\right) 
+\end{align*}
+$$
+
+
+S -> E
+E -> Declaration
+Declaration -> Type VarName Assignment
+Type -> ??
+VarName -> ??
+Assignment -> ??
+VarName -> Alphabet AlphaNumericString
+VarName -> _ AlphaNumericString
+AlphaNumericString -> AlphaNumericString AlphaNumeric 
+AlphaNumericString -> $\varepsilon$
+AlphaNumeric -> Alpha
+AlphaNumeric -> Numeric
+AlphaNumeric -> _
+
+
+
+Type -> FundamentalType
+
+```c
+ int foo;
+ typedef int foo;
+ foo x;
+```
+
+Name
