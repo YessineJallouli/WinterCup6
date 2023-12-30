@@ -6,7 +6,7 @@ Rami has brought K pieces of charcoal and left them at the office. Oussama decid
 
 Formally, he wants to maximize :
 
-$\sum\limits_{i=1}^N$ $\sum\limits_{j=1}^M$ $\sum\limits_{k=1}^K$ $D$($i$,$j$,$k$)  where $D$($i$,$j$,$k$) denotes the Manhattan distance between cell ($i$,$j$) and the $k$th piece.
+$\sum\limits_{i=1}^N \sum\limits_{j=1}^M \sum\limits_{k=1}^K D(i,j,k)$  where $D(i,j,k)$ denotes the Manhattan distance between cell ($i$,$j$) and the $k$th piece.
 
 Help Oussama before his lungs get sick.
 

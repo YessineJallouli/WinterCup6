@@ -6,7 +6,7 @@ As time went, Yessine's schedule has got really busy so he decided to hire his f
 
 Given a sequence $A$ of $N$ numbers denoting the prices of a certain cryptocurrency over a period of time, find the highest contiguous increase in price (HCI) . The HCI is the largest possible difference between the first and last element over all contiguous non-decreasing subsequences.
 
-* A contiguous subsequence $A_{i}$ $A_{i+1}$$A_{i+2}$...$A_j$ is a non-decreasing sequence if it satisfies $ A_i \le A_{i+1} \le A_{i+2} \le ... \le A_j $
+* A contiguous subsequence $A_{i}, A_{i+1},A_{i+2},\dots,A_j$ is a non-decreasing sequence if it satisfies $A_i \le A_{i+1} \le A_{i+2} \le ... \le A_j$
 
 Can you solve this problem ?
 
@@ -19,3 +19,6 @@ The second line contains $N$ integers denoting the sequence $A$ ($ 1 \le A_i \le
 **Output**
 
 Print the highest contiguous increase of the cryptocurrency
+
+
+

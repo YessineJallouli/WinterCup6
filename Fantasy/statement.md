@@ -10,11 +10,11 @@ Find out if Oussama can help Yessine win.
 
 **Input**
 
-The first line contains six integers $N$,$M$,$L$,$F$,$W$,$R$ .  ( $ 1\le N,F,R \le10^5 $ , $ 1 \le M,L \le 10 $ , $ 1 \le W \le 50 $)
+The first line contains six integers $N$,$M$,$L$,$F$,$W$,$R$ .  $(  1\le N,F,R \le10^5 , 1 \le M,L \le 10,  1 \le W \le 50 )$
 
-The second line contains $N$ integers (sorted in descending order) denoting the scoreboard $S$ ( $ 1 \le S_i \le 10^6 $) where Yessine is the $R$th player.
+The second line contains $N$ integers (sorted in descending order) denoting the scoreboard $S$ $(  1 \le S_i \le 10^6 )$ where Yessine is the $R$th player.
 
-The second line contains $F$ ( $ 1\le F \le10^5 $) integers denoting the sequence $P$ ( $ -$$M$$  \le P_i \le $$M$ )
+The second line contains $F (  1\le F \le10^5 )$ integers denoting the sequence $P(  -M  \le P_i \le M )$
 
 $N$ lines follow, each line contains $L$ integers. The $i$th line denotes the footballers chosen by the $i$th player.
 
