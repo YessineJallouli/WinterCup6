@@ -4,9 +4,9 @@ Yessine plays a game called Fantasy. In this game, each players picks $L$ footba
 
 There are $N$ people playing this game. They are ranked in a scoreboard $S$ where the $i$th player has a total score $S_i$. Yessine currently has rank $R$ . He wants to finish first so badly. He got addicted to the game and started skipping his competitive programming training. Oussama has noticed that so he decided to save him from his addiction.  Since he knows that Yessine likes challenges only, He will help him win this season so he would get bored and quit the game for good.
 
-The $i$th footballer usually gets weekly score $P_i$ . Each week, Oussama will travel to put $x$ kilos of Harissa in the footballer's meal, so his stomach would hurt and his score will decrease by x (but he can't make it less than -$M$) . He can do this to any number of footballers any number of times  (he has no ethics or morals, plus he's from Nabeul so he has an infinite amount of Harissa).
+The $i$th footballer usually gets weekly score $P_i$ . Each week, Oussama can do the following operation :               He will travel to put $x$ kilos of Harissa in the footballer's meal, so his stomach would hurt and his score will decrease by $x$ (but he can't make it less than -$M$) . He can do this to any number of footballers any number of times  (he has no ethics or morals, plus he's from Nabeul so he has an infinite amount of Harissa).
 
-Find out if Oussama can help Yessine win.
+Find out if Oussama can help Yessine rank first in the game.
 
 **Input**
 
