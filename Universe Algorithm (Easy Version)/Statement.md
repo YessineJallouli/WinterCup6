@@ -19,4 +19,3 @@ The input contains one integer $m$ $(1 \le m \le 10^{5})$ — The length of the 
 **Output**
 
 Output one integer, representing the desired answer modulo $998,244,353$
-
