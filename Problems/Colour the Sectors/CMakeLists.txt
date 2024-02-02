@@ -5,5 +5,5 @@ cmake_minimum_required(VERSION 3.11)
 
 set(CMAKE_CXX_STANDARD 20)
 add_executable(SectorColoursV1 version1.cpp)
-add_executable(SectorColoursV2 version2.cpp)
+#add_executable(SectorColoursV2 version2.cpp)
 add_executable(SectorColoursGenerator generator.cpp)

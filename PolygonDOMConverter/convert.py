@@ -64,9 +64,9 @@ def prepare_problem_directory(problem: Problem):
     os.makedirs(os.path.join(problem.short_name, "data/sample"),exist_ok=True)
     os.makedirs(os.path.join(problem.short_name, "submissions"),exist_ok=True)
     if problem.checker_file is not None or problem.interactor_file is not None:
-        os.makedirs(os.path.join(problem.short_name, "output_validators"),exist_ok=True)
+        os.makedirs(os.path.join(problem.short_name, "output_validators","validator"),exist_ok=True)
     if problem.validator_file is not None:
-        os.makedirs(os.path.join(problem.short_name, "input_validators"),exist_ok=True)
+        os.makedirs(os.path.join(problem.short_name, "input_validators","validator"),exist_ok=True)
     pass
 
 
@@ -131,9 +131,11 @@ def copy_custom_files(contest_directory:str, problem:Problem):
     if problem.checker_file is not None:
         shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, problem.checker_file), os.path.join(problem.short_name,"output_validators"))
     if problem.interactor_file is not None:
-        shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, problem.interactor_file), os.path.join(problem.short_name,"output_validators"))
+        shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, problem.interactor_file),
+                    os.path.join(problem.short_name,"output_validators","validator"))
     if problem.validator_file is not None:
-        shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, problem.validator_file), os.path.join(problem.short_name,"input_validators"))
+        shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, problem.validator_file),
+                    os.path.join(problem.short_name,"input_validators", "validator"))
 
 
 def copy_problem_statements(contest_directory: str, problem: Problem, preferred_type: str):

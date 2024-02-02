@@ -234,7 +234,7 @@ int main()
     std::vector<cp::integer> d(L),I(L);
     std::iota(I.begin(),I.end(),0);
     for(int i=1;i<L;i++)
-        d[i]=F->divisors_count(i);
+        d[i]=cp::divisors_count(i,*F);
     std::vector<integer> I_table(L);
     I_table=cp::inverse_table(L,M);
     std::vector<IK> K_pow(L),cache(L);

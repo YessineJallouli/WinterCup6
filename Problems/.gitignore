@@ -1,0 +1,9 @@
+#Project files
+.idea
+.vs
+.vscode
+.obsidian
+
+#Build
+cmake-build-*
+bin

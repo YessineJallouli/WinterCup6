@@ -16,7 +16,8 @@ std::ostream& query(std::ostream &H,int a,int i)
     return H << "? " << a << ' ' << i << std::endl;
 
 }
-
+using integer=cp::integer;
+using factoriser=cp::factoriser;
 std::pair<integer,int> largest_prime(int n,std::mt19937_64  &rng,factoriser &F)
 {
     std::uniform_int_distribution<int> d(1,n);
