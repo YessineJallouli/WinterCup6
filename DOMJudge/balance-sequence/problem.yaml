@@ -1,9 +1,0 @@
-author: Yessine Jallouli
-source: Winter Cup 5, 2024, INSAT, Tunisia, Problem A.
-uuid: F
-limits:
-  memory: 512
-  time: 2
-  output: 4
-  code: 1024 
-validation: custom

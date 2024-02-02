@@ -28,7 +28,8 @@ def custom_file_warning(custom_file,problems):
             "WARNING")
         logger.log(f"Custom {custom_file}: {', '.join([str(problem) for problem in problems])}","WARNING")
 
-
+def is_zip(path):
+    return path.endswith(".zip")
 
 
 if __name__ == "__main__":
@@ -41,10 +42,16 @@ if __name__ == "__main__":
     parser.add_argument("--tex", help="Compile Tex files",action="store_true")
     parser.add_argument("--preferred-statement",help="Preferred statement type",default="pdf")
     args = parser.parse_args()
-    if args.tmp is None:
+    use_tmp = args.tmp is not None
+    if args.tmp is None and (args.target is None or is_zip(args.target)):
         logger.log("No TMP directory specified, creating one")
         args.tmp = tempfile.mkdtemp()
         logger.log(f"TMP directory: {args.tmp}")
+    elif args.target is not None and not is_zip(args.target):
+        use_tmp=False
+        args.tmp=args.target
+        os.makedirs(args.tmp,exist_ok=True)
+        args.tmp = os.path.abspath(args.tmp)
     contest:Contest
     with scripts.change_directory(args.directory):
         with open("contest.xml", "r") as file:

@@ -19,7 +19,7 @@ def prepare_problemset_yaml(path: str, contest: Contest):
     problemset = []
     for problem, color in zip(contest.problems, cycle(PALETTE)):
         problemset.append({"color": color,
-                           "short-name": str(problem),
+                           "short-name": problem.short_name,
                            "rgb": color
                            })
     with open(path, "w") as file:
@@ -42,7 +42,7 @@ def prepare_problems_yaml(path: str, contest: Contest):
 
 
 def current_time_iso_8601():
-    return time.strftime("%Y-%m-%dT%H:%M:%S:%z", time.localtime())
+    return time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime())
 
 
 def prepare_contest_yaml(path: str, contest: Contest):
@@ -59,14 +59,14 @@ def prepare_contest_yaml(path: str, contest: Contest):
 
 def prepare_problem_directory(problem: Problem):
     os.makedirs(problem.short_name, exist_ok=True)
-    os.makedirs(os.path.join(problem.short_name, "problem_statement"))
-    os.makedirs(os.path.join(problem.short_name, "data/secret"))
-    os.makedirs(os.path.join(problem.short_name, "data/sample"))
-    os.makedirs(os.path.join(problem.short_name, "submissions"))
+    os.makedirs(os.path.join(problem.short_name, "problem_statement"),exist_ok=True)
+    os.makedirs(os.path.join(problem.short_name, "data/secret"),exist_ok=True)
+    os.makedirs(os.path.join(problem.short_name, "data/sample"),exist_ok=True)
+    os.makedirs(os.path.join(problem.short_name, "submissions"),exist_ok=True)
     if problem.checker_file is not None or problem.interactor_file is not None:
-        os.makedirs(os.path.join(problem.short_name, "output_validators"))
+        os.makedirs(os.path.join(problem.short_name, "output_validators"),exist_ok=True)
     if problem.validator_file is not None:
-        os.makedirs(os.path.join(problem.short_name, "input_validators"))
+        os.makedirs(os.path.join(problem.short_name, "input_validators"),exist_ok=True)
     pass
 
 
@@ -117,6 +117,7 @@ def copy_test_files(contest_directory: str, problem: Problem):
         shutil.copy(os.path.join(path, test_in), os.path.join(problem.short_name,"data", dst, f"{test_in}.in"))
         shutil.copy(os.path.join(path, test_ans), os.path.join(problem.short_name,"data", dst, f"{test_in}.ans"))
         k += 2
+        index+=1
 
 
 def copy_submission_files(contest_directory: str, problem: Problem):
@@ -153,12 +154,19 @@ def prepare_contest_archive(contest_directory: str, working_directory: str, cont
         prepare_problems_yaml("problems.yaml", contest)
         prepare_contest_yaml("contest.yaml", contest)
         for problem in contest.problems:
+            logging.logger.log(f"Processing problem {problem.short_name}")
             prepare_problem_directory(problem)
+            logging.logger.log("\tCreating problem YML file")
             prepare_problem_yaml(os.path.join(problem.short_name,"problem.yaml"), contest_directory, problem)
+            logging.logger.log("\tCopying test files")
             copy_test_files(contest_directory, problem)
+            logging.logger.log("\tCopying submission files")
             copy_submission_files(contest_directory, problem)
+            logging.logger.log("\tCopying problem statements")
             copy_problem_statements(contest_directory, problem, preferred_type=preferred_type)
+            logging.logger.log("\tCopying custom files")
             copy_custom_files(contest_directory, problem)
+            logging.logger.log("\tCreating DOMJudge-related files")
             with open(os.path.join(problem.short_name,".timelimit"),'w') as file:
                 file.write(f"{problem.time_limit}")
             with open(os.path.join(problem.short_name,"domjudge-problem.ini"),'w') as file:

@@ -39,8 +39,11 @@ class Statement:
         else:
             raise Exception("Unknown statement type")
 
-def convert_to_mb(value):
+def convert_to_mb(value)->int:
     return value//1024**2
+
+def convert_to_seconds(value)->float:
+    return value/1000
 
 class Problem:
     TIME_LIMIT_DEFAULT=1
@@ -102,7 +105,7 @@ class Problem:
                 interactor_file = interactor_file.attrib["path"]
                 logging.logger.log(f"\tInteractor file: {interactor_file}")
         tests=root.find("judging").find("testset")
-        time_limit=int(tests.find("time-limit").text)
+        time_limit=convert_to_seconds(int(tests.find("time-limit").text))
         memory_limit=convert_to_mb(int(tests.find("memory-limit").text))
         logging.logger.log(f"\tTime limit: {time_limit} seconds")
         logging.logger.log(f"\tMemory limit: {memory_limit} MB")
