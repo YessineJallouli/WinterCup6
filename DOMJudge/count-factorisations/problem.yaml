@@ -1,0 +1,8 @@
+author: Rami Zouari
+source: Winter Cup 6, 2024, INSAT, Tunisia, Problem A.
+uuid: D
+limits:
+  memory: 512
+  time: 1
+  output: 2
+  code: 1024 

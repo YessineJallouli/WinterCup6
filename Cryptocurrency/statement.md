@@ -12,9 +12,9 @@ Can you solve this problem ?
 
 **Input**
 
-The first line contains an integer $N$ ($ 1\le N \le10^5 $)  denoting the length of the sequence
+The first line contains an integer $N$ ($1\le N \le10^5$)  denoting the length of the sequence
 
-The second line contains $N$ integers denoting the sequence $A$ ($ 1 \le A_i \le 10^9 $)
+The second line contains $N$ integers denoting the sequence $A$ ($1 \le A_i \le 10^9)$
 
 **Output**
 

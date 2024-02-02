@@ -24,11 +24,12 @@ Output a single integer $r:$ the number of fewest moves possible on which **Rami
 ## Example
 ### Input
 ```
-4 5
-11111
-12321
-12221
-11111
+5 5
+rrrgr
+grrgg
+rgrgr
+rgrrr
+ggggg
 ```
 
 ### Output

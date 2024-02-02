@@ -13,9 +13,7 @@ You are given two integers $m$ and $k = 2$, the length of the arrays and the max
 Notice that the answer might be large, please output the desired value modulo $998,244,353$
 
 **Input**
-
-The input contains one integer $m$ $(1 \le m \le 10^{5})$ — The length of the arrays.
+The input contains one integer $m$ $(1 \le m \le 10^{3})$ — The length of the arrays.
 
 **Output**
-
 Output one integer, representing the desired answer modulo $998,244,353$

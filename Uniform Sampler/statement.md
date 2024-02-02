@@ -1,16 +1,14 @@
 # Uniform Sampler
 
-**Rami** was having a very serious problem in his internship. He has to sample $m$ **distinct** elements from the set $\{0,\dots,n-1\}.$
-To achieve this, he implemented the following algorithm:
-1. Initialise $S=\varnothing$
-2. Select a random $a$ uniformly from $\{0,\dots,n-1\}$
-3. If $a\not\in S,$ append $a$ to $S$
-4. Repeat $2$ while the size of $S$ is strictly less than $m$
+*Oussama* loves basketball, and he loves to improve his throwing technique.
 
-**Rami** wants to estimate the computational complexity of his algorithm. And to do that, he will count the number of times step $2$ will be executed in **average**
+After finishing his work at Iceberg Corporation, he will prepare $n$ baskets aligned as an array and start throwing basketballs. *Oussama* may not be the best basketball player, but he has learnt to not miss any ball.
 
-Please help him
+In fact, he never misses his shot. He will always scores at one of the baskets, but also, his accuracy is average as best: At each attempt, the probability that he will score a goal to the $i^\text{th}$ basket is $\frac{1}{n}.$ Also, if he scores a goal to the $i^\text{th}$ basket, its score will increase by one.
 
+Initially, the score of each basket is $0$, and he will make shots until at least $m$ different baskets have **non-zero** scores. Also, he has infinite amount of basketballs.
+
+*Oussama* is still making attempts, and *Yessine* is getting worried that he will his work next day. Can you help him estimate **the expected** number of attempts he will make until scoring at least a goal to $m$ baskets.
 ## Input
 - $1\le T \le 10^6:$ The number of test cases
 - For each test case:

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="17" short-name="balance-the-sequence" url="https://polygon.codeforces.com/p53Yic8/yessjall/balance-the-sequence">
+    <names>
+        <name language="english" value="Balance The sequence"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/.html/english/problem.html" type="text/html"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="" run-count="1">
+        <testset name="tests">
+            <time-limit>1000</time-limit>
+            <memory-limit>268435456</memory-limit>
+            <test-count>82</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test description="File &quot;input10.txt&quot;" method="manual"/>
+                <test description="File &quot;input39.txt&quot;" method="manual"/>
+                <test description="File &quot;big10.txt&quot;" method="manual"/>
+                <test description="File &quot;input9.txt&quot;" method="manual"/>
+                <test description="File &quot;input8.txt&quot;" method="manual"/>
+                <test description="File &quot;input7.txt&quot;" method="manual"/>
+                <test description="File &quot;input6.txt&quot;" method="manual"/>
+                <test description="File &quot;input5.txt&quot;" method="manual"/>
+                <test description="File &quot;input4.txt&quot;" method="manual"/>
+                <test description="File &quot;input3.txt&quot;" method="manual"/>
+                <test description="File &quot;input2.txt&quot;" method="manual"/>
+                <test description="File &quot;input11.txt&quot;" method="manual"/>
+                <test description="File &quot;input20.txt&quot;" method="manual"/>
+                <test description="File &quot;input40.txt&quot;" method="manual"/>
+                <test description="File &quot;input38.txt&quot;" method="manual"/>
+                <test description="File &quot;input37.txt&quot;" method="manual"/>
+                <test description="File &quot;input36.txt&quot;" method="manual"/>
+                <test description="File &quot;input35.txt&quot;" method="manual"/>
+                <test description="File &quot;input34.txt&quot;" method="manual"/>
+                <test description="File &quot;input33.txt&quot;" method="manual"/>
+                <test description="File &quot;input32.txt&quot;" method="manual"/>
+                <test description="File &quot;input31.txt&quot;" method="manual"/>
+                <test description="File &quot;inp5.txt&quot;" method="manual"/>
+                <test description="File &quot;inp4.txt&quot;" method="manual"/>
+                <test description="File &quot;inp3.txt&quot;" method="manual"/>
+                <test description="File &quot;inp2.txt&quot;" method="manual"/>
+                <test description="File &quot;inp1.txt&quot;" method="manual"/>
+                <test description="File &quot;inp15.txt&quot;" method="manual"/>
+                <test description="File &quot;inp14.txt&quot;" method="manual"/>
+                <test description="File &quot;inp13.txt&quot;" method="manual"/>
+                <test description="File &quot;inp12.txt&quot;" method="manual"/>
+                <test description="File &quot;inp11.txt&quot;" method="manual"/>
+                <test description="File &quot;inp10.txt&quot;" method="manual"/>
+                <test description="File &quot;inp9.txt&quot;" method="manual"/>
+                <test description="File &quot;inp8.txt&quot;" method="manual"/>
+                <test description="File &quot;inp7.txt&quot;" method="manual"/>
+                <test description="File &quot;inp6.txt&quot;" method="manual"/>
+                <test description="File &quot;small15.txt&quot;" method="manual"/>
+                <test description="File &quot;small14.txt&quot;" method="manual"/>
+                <test description="File &quot;small13.txt&quot;" method="manual"/>
+                <test description="File &quot;small12.txt&quot;" method="manual"/>
+                <test description="File &quot;small11.txt&quot;" method="manual"/>
+                <test description="File &quot;small10.txt&quot;" method="manual"/>
+                <test description="File &quot;small9.txt&quot;" method="manual"/>
+                <test description="File &quot;small8.txt&quot;" method="manual"/>
+                <test description="File &quot;small7.txt&quot;" method="manual"/>
+                <test description="File &quot;small6.txt&quot;" method="manual"/>
+                <test description="File &quot;small5.txt&quot;" method="manual"/>
+                <test description="File &quot;small4.txt&quot;" method="manual"/>
+                <test description="File &quot;small3.txt&quot;" method="manual"/>
+                <test description="File &quot;small2.txt&quot;" method="manual"/>
+                <test description="File &quot;small1.txt&quot;" method="manual"/>
+                <test description="File &quot;big30.txt&quot;" method="manual"/>
+                <test description="File &quot;big29.txt&quot;" method="manual"/>
+                <test description="File &quot;big28.txt&quot;" method="manual"/>
+                <test description="File &quot;big27.txt&quot;" method="manual"/>
+                <test description="File &quot;big26.txt&quot;" method="manual"/>
+                <test description="File &quot;big25.txt&quot;" method="manual"/>
+                <test description="File &quot;big24.txt&quot;" method="manual"/>
+                <test description="File &quot;big23.txt&quot;" method="manual"/>
+                <test description="File &quot;big22.txt&quot;" method="manual"/>
+                <test description="File &quot;big21.txt&quot;" method="manual"/>
+                <test description="File &quot;big20.txt&quot;" method="manual"/>
+                <test description="File &quot;big19.txt&quot;" method="manual"/>
+                <test description="File &quot;big18.txt&quot;" method="manual"/>
+                <test description="File &quot;big17.txt&quot;" method="manual"/>
+                <test description="File &quot;big16.txt&quot;" method="manual"/>
+                <test description="File &quot;big15.txt&quot;" method="manual"/>
+                <test description="File &quot;big14.txt&quot;" method="manual"/>
+                <test description="File &quot;big13.txt&quot;" method="manual"/>
+                <test description="File &quot;big12.txt&quot;" method="manual"/>
+                <test description="File &quot;big11.txt&quot;" method="manual"/>
+                <test description="File &quot;big9.txt&quot;" method="manual"/>
+                <test description="File &quot;big8.txt&quot;" method="manual"/>
+                <test description="File &quot;big7.txt&quot;" method="manual"/>
+                <test description="File &quot;big6.txt&quot;" method="manual"/>
+                <test description="File &quot;big5.txt&quot;" method="manual"/>
+                <test description="File &quot;big4.txt&quot;" method="manual"/>
+                <test description="File &quot;big3.txt&quot;" method="manual"/>
+                <test description="File &quot;big2.txt&quot;" method="manual"/>
+                <test description="File &quot;big1.txt&quot;" method="manual"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/checker.cpp" type="cpp.g++17"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker type="testlib">
+            <source path="files/checker.cpp" type="cpp.g++17"/>
+            <copy path="check.cpp" type="cpp.g++17"/>
+            <testset>
+                <test-count>0</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests/>
+            </testset>
+        </checker>
+        <solutions>
+            <solution tag="wrong-answer">
+                <source path="solutions/WA.cpp" type="cpp.g++17"/>
+            </solution>
+            <solution tag="time-limit-exceeded-or-accepted">
+                <source path="solutions/brute_force.cpp" type="cpp.g++17"/>
+            </solution>
+            <solution tag="main">
+                <source path="solutions/cppSolution.cpp" type="cpp.g++17"/>
+            </solution>
+            <solution tag="rejected">
+                <source path="solutions/heuristic.cpp" type="cpp.g++17"/>
+            </solution>
+            <solution tag="accepted">
+                <source path="solutions/pySolution.py" type="python.3"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>0</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list/>
+    </stresses>
+</problem>

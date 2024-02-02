@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 3.27)
-project(Infinite_Money_Glitch)
+cmake_minimum_required(VERSION 3.26)
+project(InfiniteMoney)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
-add_executable(heuristic heuristic.cpp)
+add_executable(InfiniteMoney solution.cpp)
+add_executable(InfiniteMoneyGenerator generator.cpp)
+add_executable(InfiniteMoneyValidator validator.cpp)
 

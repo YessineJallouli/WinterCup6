@@ -10,7 +10,7 @@ You can make no more than $2n-4$ queries in order to guess $p$.
 
 The interaction starts after reading the single integer $(3 \le n \le 10^{5})$ — the length of permutation $p$.
 
-To get $lcm(p_{i}, p_{j})$, output the query in format $? \ i \  j$ $(1 \le i, j \le n)$ and $i \neq j$
+To get $\text{lcm}(p_{i}, p_{j})$, output the query in format $? \ i \  j$ $(1 \le i, j \le n)$ and $i \neq j$
 
 You can make at most $2n-4$ queries. After the incorrect query you will receive $-1$ and you should exit immediately to get Wrong answer verdict.
 
