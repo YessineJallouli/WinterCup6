@@ -1,0 +1,38 @@
+[
+	{
+		"id" :"INST-1",
+		"name" : "INSAT",
+		"formal_name": "Institut National des Sciences Appliquées et des Technologies",
+		"country" : "TUN"
+	},
+	{
+		"id" :"INST-2",
+		"name" : "ISI",
+		"formal_name": "Institut Supérier d'Informatique",
+		"country" : "TUN"
+	},
+	{
+		"id" :"INST-3",
+		"name" : "ENIT",
+		"formal_name": "École National d'Ingénierie de Tunis",
+		"country" : "TUN"
+	},
+	{
+		"id" :"INST-4",
+		"name" : "ENSI",
+		"formal_name": "École Nationale des Sciences d'Informatiques",
+		"country" : "TUN"
+	},
+	{
+		"id" :"INST-5",
+		"name" : "POLYTECH",
+		"formal_name": "École Polytechnique de Tunisie",
+		"country" : "TUN"
+	},
+	{
+		"id" : "INST-6",
+		"name" :"SUPCOM",
+		"formal_name" : "École Supérieure des Communications de Tunis"
+	}
+]
+

@@ -401,7 +401,7 @@ using IntegerDistributionManager=DistributionManager<IntegerDistribution>;
 using ArrayDistribution=Distribution<std::vector<cp::integer>>;
 using ArrayDistributionManager=DistributionManager<ArrayDistribution>;
 
-struct DivisibilityGameDistribution : public ArrayDistribution
+struct PermutationDistribution : public ArrayDistribution
 {
     cp::integer n,k;
 
@@ -413,7 +413,7 @@ struct DivisibilityGameDistribution : public ArrayDistribution
     }
 };
 
-struct OneMoveWin : public DivisibilityGameDistribution
+struct OneMoveWin : public PermutationDistribution
 {
     std::uniform_int_distribution<cp::integer> d;
     int parameters_count() const
@@ -430,7 +430,7 @@ struct OneMoveWin : public DivisibilityGameDistribution
 
     void update(std::span<std::string> &params) override
     {
-        DivisibilityGameDistribution::update(params);
+        PermutationDistribution::update(params);
         d=std::uniform_int_distribution<cp::integer>(0,k-1);
     }
 
@@ -441,7 +441,7 @@ struct OneMoveWin : public DivisibilityGameDistribution
 
 };
 
-struct RandomDivisibilityArray : public DivisibilityGameDistribution
+struct RandomDivisibilityArray : public PermutationDistribution
 {
     std::uniform_int_distribution<cp::integer> d;
     int parameters_count() const
@@ -458,7 +458,7 @@ struct RandomDivisibilityArray : public DivisibilityGameDistribution
 
     void update(std::span<std::string> &params) override
     {
-        DivisibilityGameDistribution::update(params);
+        PermutationDistribution::update(params);
         d=std::uniform_int_distribution<cp::integer>(0,k);
     }
 
@@ -469,7 +469,7 @@ struct RandomDivisibilityArray : public DivisibilityGameDistribution
 
 };
 
-struct RandomArray : public DivisibilityGameDistribution
+struct RandomPermutation : public PermutationDistribution
 {
     std::uniform_int_distribution<cp::integer> d;
     cp::integer L;
@@ -487,14 +487,14 @@ struct RandomArray : public DivisibilityGameDistribution
 
     void update(std::span<std::string> &params) override
     {
-        DivisibilityGameDistribution::update(params);
+        PermutationDistribution::update(params);
         L=std::stoll(params[0]);
         d=std::uniform_int_distribution<cp::integer>(0,L);
     }
 
     [[nodiscard]] std::shared_ptr<Cloneable> clone() const override
     {
-        return std::make_unique<RandomArray>(*this);
+        return std::make_unique<RandomPermutation>(*this);
     }
 
 };
@@ -519,9 +519,9 @@ int main(int argc, char**argv)
     integerManager.add<IntegerDiracDeltaDistribution>("dirac");
     arrayManager.add<OneMoveWin>("one-move");
     arrayManager.add<RandomDivisibilityArray>("divisibility-array");
-    arrayManager.add<RandomArray>("random-array");
+    arrayManager.add<RandomPermutation>("random-array");
     std::span params(args);
-    auto distribution = std::dynamic_pointer_cast<DivisibilityGameDistribution>(setup_distribution(params,arrayManager));
+    auto distribution = std::dynamic_pointer_cast<PermutationDistribution>(setup_distribution(params, arrayManager));
     auto G=distribution->sample();
     std::cout << distribution->n << ' ' << distribution->k << '\n';
     std::shuffle(G.begin(),G.end(),RandomNumberGenerator{});

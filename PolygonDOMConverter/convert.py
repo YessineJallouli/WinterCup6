@@ -4,7 +4,7 @@ import time
 import typing
 
 import yaml
-import logging
+import logs
 from itertools import cycle
 import shutil
 
@@ -63,6 +63,7 @@ def prepare_problem_directory(problem: Problem):
     os.makedirs(os.path.join(problem.short_name, "data/secret"),exist_ok=True)
     os.makedirs(os.path.join(problem.short_name, "data/sample"),exist_ok=True)
     os.makedirs(os.path.join(problem.short_name, "submissions"),exist_ok=True)
+    os.makedirs(os.path.join(problem.short_name, "attachments"),exist_ok=True)
     if problem.checker_file is not None or problem.interactor_file is not None:
         os.makedirs(os.path.join(problem.short_name, "output_validators","validator"),exist_ok=True)
     if problem.validator_file is not None:
@@ -109,7 +110,7 @@ def copy_test_files(contest_directory: str, problem: Problem):
             else:
                 test_pairs.append((dirs[k - 1], dirs[k]))
         else:
-            logging.logger.log("Files mismatch. Ignoring current pair", "WARNING")
+            logs.logger.log("Files mismatch. Ignoring current pair", "WARNING")
             k += 1
             continue
         test_in, test_ans = test_pairs[-1]
@@ -129,7 +130,8 @@ def copy_submission_files(contest_directory: str, problem: Problem):
 
 def copy_custom_files(contest_directory:str, problem:Problem):
     if problem.checker_file is not None:
-        shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, problem.checker_file), os.path.join(problem.short_name,"output_validators"))
+        shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, problem.checker_file),
+                    os.path.join(problem.short_name,"output_validators","validator"))
     if problem.interactor_file is not None:
         shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, problem.interactor_file),
                     os.path.join(problem.short_name,"output_validators","validator"))
@@ -145,9 +147,26 @@ def copy_problem_statements(contest_directory: str, problem: Problem, preferred_
     if preferred_type in by_type:
         statement = by_type[preferred_type]
     else:
-        statement = next(iter(by_type))
-    shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, statement.path), os.path.join(problem.short_name,"problem_statement"))
+        statement = by_type[next(iter(by_type))]
     shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, statement.path), problem.short_name)
+    statement_files=set()
+    for statement in problem.statements:
+        # For tex files, we only copy the main file
+        if statement.statement_type == "tex":
+            shutil.copy(os.path.join(contest_directory,"problems", problem.short_name, statement.path),
+                        os.path.join(problem.short_name, "problem_statement"))
+        else:
+            dirname=os.path.dirname(os.path.join(contest_directory,"problems", problem.short_name, statement.path))
+            for file in os.listdir(dirname):
+                if os.path.isdir(file):
+                    logs.logger.log(f"File {file} is a directory. Ignoring", "WARNING")
+                    continue
+                if file in statement_files:
+                    logs.logger.log(f"File {file} already exists in statement directory. Ignoring", "WARNING")
+                    continue
+                statement_files.add(file)
+                shutil.copy(os.path.join(dirname,file),
+                            os.path.join(problem.short_name, "problem_statement"))
 
 
 def prepare_contest_archive(contest_directory: str, working_directory: str, contest: Contest, preferred_type="pdf"):
@@ -156,19 +175,19 @@ def prepare_contest_archive(contest_directory: str, working_directory: str, cont
         prepare_problems_yaml("problems.yaml", contest)
         prepare_contest_yaml("contest.yaml", contest)
         for problem in contest.problems:
-            logging.logger.log(f"Processing problem {problem.short_name}")
+            logs.logger.log(f"Processing problem {problem.short_name}")
             prepare_problem_directory(problem)
-            logging.logger.log("\tCreating problem YML file")
+            logs.logger.log("\tCreating problem YML file")
             prepare_problem_yaml(os.path.join(problem.short_name,"problem.yaml"), contest_directory, problem)
-            logging.logger.log("\tCopying test files")
+            logs.logger.log("\tCopying test files")
             copy_test_files(contest_directory, problem)
-            logging.logger.log("\tCopying submission files")
+            logs.logger.log("\tCopying submission files")
             copy_submission_files(contest_directory, problem)
-            logging.logger.log("\tCopying problem statements")
+            logs.logger.log("\tCopying problem statements")
             copy_problem_statements(contest_directory, problem, preferred_type=preferred_type)
-            logging.logger.log("\tCopying custom files")
+            logs.logger.log("\tCopying custom files")
             copy_custom_files(contest_directory, problem)
-            logging.logger.log("\tCreating DOMJudge-related files")
+            logs.logger.log("\tCreating DOMJudge-related files")
             with open(os.path.join(problem.short_name,".timelimit"),'w') as file:
                 file.write(f"{problem.time_limit}")
             with open(os.path.join(problem.short_name,"domjudge-problem.ini"),'w') as file:

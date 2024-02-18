@@ -2,7 +2,7 @@ import os
 from typing import List
 from xml.etree import ElementTree
 
-import logging
+import logs
 from problem import Problem
 
 def parse_contest_file(file):
@@ -22,9 +22,9 @@ class Contest:
         parsed = ElementTree.parse(file)
         root = parsed.getroot()
         contest_index = int(root.attrib["url"].split("/")[-1])
-        logging.logger.log(f"Contest ID: {contest_index}")
+        logs.logger.log(f"Contest ID: {contest_index}")
         name = root.find("names").find("name").attrib["value"]
-        logging.logger.log(f"Contest Name: {name}")
+        logs.logger.log(f"Contest Name: {name}")
         problems = []
         directories=set(os.listdir("problems"))
         problems_list=root.find("problems")
@@ -33,14 +33,14 @@ class Contest:
                 url=problem.attrib["url"]
                 index=problem.attrib["index"].upper()
                 short_name=url.split("/")[-1]
-                logging.logger.log(f"Processing problem {index}: {short_name}")
+                logs.logger.log(f"Processing problem {index}: {short_name}")
                 if short_name not in directories:
-                    logging.logger.log(f"Problem {short_name} not found",log_level="ERROR")
+                    logs.logger.log(f"Problem {short_name} not found",log_level="ERROR")
                     continue
                 problem_desc = os.path.join("problems",short_name,"problem.xml")
                 problems.append(Problem.from_xml(problem_desc,index))
             except Exception as e:
-                logging.logger.log(f"Exception raised while parsing {problem}. What: {e}","ERROR")
+                logs.logger.log(f"Exception raised while parsing {problem}. What: {e}","ERROR")
 
         return Contest(contest_index, name, problems)
     def __str__(self):

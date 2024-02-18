@@ -5,3 +5,4 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(ModularUniverse solution.cpp)
 add_executable(ModularUniverseGenerator generator.cpp)
+add_executable(CModularUniverse solution.c)

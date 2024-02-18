@@ -4,7 +4,7 @@ import tempfile
 import convert
 from contest import Contest
 import argparse
-import logging
+import logs
 import scripts
 import zipfile
 
@@ -33,7 +33,7 @@ def is_zip(path):
 
 
 if __name__ == "__main__":
-    logger=logging.init_logger()
+    logger=logs.init_logger()
     parser = argparse.ArgumentParser()
     parser.add_argument("--directory", help="The contest directory")
     parser.add_argument("--tmp",help="Temporary directory for work",default=None)

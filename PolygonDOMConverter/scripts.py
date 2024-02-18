@@ -1,7 +1,7 @@
 import contextlib
 import subprocess
 
-import logging
+import logs
 import os
 import platform
 from multiprocessing import Process
@@ -33,15 +33,15 @@ def change_directory(x,create=False,stack=None):
         os.chdir(d)
         stack.pop()
 
-def run_script_impl(script):
+def run_script_impl(script,*args):
     path=os.path.join(os.getcwd(),script)
-    result = subprocess.Popen([path],
+    result = subprocess.Popen([path,*args],
                                stderr=subprocess.STDOUT)
     result.wait()
-    logging.logger.log(f"Script exited with code {result.returncode}", "WARNING" if result.returncode != 0 else "INFO")
+    logs.logger.log(f"Script exited with code {result.returncode}", "WARNING" if result.returncode != 0 else "INFO")
     return result.returncode
 
-def run_script(script, working_dir=None):
+def run_script(script, *args,working_dir=None):
     """
     Runs a script in a separate process.
 
@@ -50,9 +50,9 @@ def run_script(script, working_dir=None):
     :return: The process object.
     """
     if working_dir is None:
-        return run_script_impl(script)
+        return run_script_impl(script,*args)
     with change_directory(working_dir, create=False):
-        return run_script_impl(script)
+        return run_script_impl(script,*args)
 
 
 def mark_scripts_as_executable(dir):
@@ -69,8 +69,8 @@ class Script:
         self.script = script
 
     def run(self, working_dir=None):
-        logging.logger.log(f"Running script {self.name}")
-        return run_script(self.script, working_dir)
+        logs.logger.log(f"Running script {self.name}")
+        return run_script(self.script, working_dir=working_dir)
 
     def __str__(self):
         return self.name

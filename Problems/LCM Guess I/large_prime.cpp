@@ -464,7 +464,8 @@ std::pair<integer,int> large_prime(int n,std::mt19937_64  &rng,factoriser &F, st
     while(a==c || b==c)
         c=d(rng);
     s=query(std::cout,std::cin,a,c,M);
-    if(F.prime_factors(s).back() == P.first)
+    auto factors=F.prime_factors(s);
+    if(std::binary_search(factors.begin(),factors.end(),P.first))
         P.second = a;
     else P.second=b;
     return P;

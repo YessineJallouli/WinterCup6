@@ -1,0 +1,15 @@
+[
+	{
+	"id":"13337",
+	"name": "Companies",
+	"hidden" : true, 
+	},
+	{
+	"id":"47",
+	"name": "Participants"
+	},
+	{
+	"id": "23",
+	"name": "Spectators"
+	}
+]

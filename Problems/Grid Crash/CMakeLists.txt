@@ -3,6 +3,7 @@ project(GridCrash)
 
 set(CMAKE_CXX_STANDARD 20)
 add_executable(GridCrashSolution solution.cpp)
+add_executable(CGridCrashSolution solution.c)
 add_executable(GridCrashBFS solution.cpp)
 add_executable(GridCrashHeuristic solution.cpp)
 add_executable(GridCrashCombined solution.cpp)
