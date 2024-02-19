@@ -48,8 +48,8 @@ if [[ "$TEST_FILE" == "-" ]]; then
 	IFS= read -r N
 	IFS= read -r P
 	INTERACTOR_TMP_FILE=$(mktemp)
-	echo $N >>"$INTERACTOR_TMP_FILE" 
-	echo $P >>"$INTERACTOR_TMP_FILE"
+	echo "$N" >>"$INTERACTOR_TMP_FILE"
+	echo "$P" >>"$INTERACTOR_TMP_FILE"
 	TEST_FILE="$INTERACTOR_TMP_FILE"
 
 fi
