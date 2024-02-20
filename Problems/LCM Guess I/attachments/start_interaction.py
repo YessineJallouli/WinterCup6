@@ -19,40 +19,46 @@ import os
 
 class Logger(abc.ABC):
     @abc.abstractmethod
-    def log(self, message,log_level="INFO"):
+    def log(self, message, log_level="INFO"):
         pass
 
+
 class ConsoleLogger(Logger):
-    def log(self, message,log_level="INFO"):
-        print("["+log_level + "]: " + message)
+    def log(self, message, log_level="INFO"):
+        print("[" + log_level + "]: " + message)
 
 
 class FileLogger(Logger):
     def __init__(self, file_name):
         self.file_name = file_name
 
-    def log(self, message,log_level="INFO"):
+    def log(self, message, log_level="INFO"):
         with open(self.file_name, "a") as file:
-            file.write("["+log_level + "]: " + message + "\n")
+            file.write("[" + log_level + "]: " + message + "\n")
+
 
 class NullLogger(Logger):
-    def log(self, message,log_level="INFO"):
+    def log(self, message, log_level="INFO"):
         pass
 
 
-logger : Logger
+logger = NullLogger()
 MAX_ERROR_MESSAGE_LENGTH = 100
+
+
 def init_logger():
     global logger
     logger = ConsoleLogger()
     return logger
 
+
 def set_logger(new_logger):
     global logger
     logger = new_logger
 
+
 @contextlib.contextmanager
-def change_directory(x,create=False,stack=None):
+def change_directory(x, create=False, stack=None):
     if stack is None:
         stack = []
     d = os.getcwd()
@@ -75,65 +81,100 @@ def change_directory(x,create=False,stack=None):
         os.chdir(d)
         stack.pop()
 
-def run_script_impl(script,*args):
-    path=os.path.join(os.getcwd(),script)
-    result = subprocess.Popen([path,*args],
-                               stderr=subprocess.STDOUT)
-    result.wait()
-    logger.log(f"Script exited with code {result.returncode}", "WARNING" if result.returncode != 0 else "INFO")
-    return result.returncode
 
-def run_script(script, *args,working_dir=None):
-    """
-    Runs a script in a separate process.
+class BidirectionalPipe:
+    DR = 0
+    DW = 1
+    RR = 2
+    RW = 3
+    DIRECT_READ = 0
+    DIRECT_WRITE = 1
+    REVERSE_READ = 2
+    REVERSE_WRITE = 3
 
-    :param script: The script to run.
-    :param working_dir: The working directory to run the script in.
-    :return: The process object.
-    """
-    if working_dir is None:
-        return run_script_impl(script,*args)
-    with change_directory(working_dir, create=False):
-        return run_script_impl(script,*args)
+    def __init__(self):
+        self.pipes = os.pipe(), os.pipe()
+        self.pipe_files = [os.fdopen(self.pipes[0][0], "r"), os.fdopen(self.pipes[0][1], "w"),
+                             os.fdopen(self.pipes[1][0], "r"), os.fdopen(self.pipes[1][1], "w")]
+
+    def __getitem__(self, item):
+        return self.pipe_files[item]
 
 
 class Executable:
-    def __init__(self, name, executable, input_binding, output_binding , err_binding=subprocess.STDOUT):
+    def __init__(self, name, executable, input_binding, output_binding, err_binding=sys.stderr):
         self.name = name
         self.executable = executable
         self.input_binding = input_binding
         self.output_binding = output_binding
         self.err_binding = err_binding
+        self.process = None
 
-    def run(self,*args, working_dir=None):
-        logger.log(f"Running script {self.name}")
+    def run(self, *args, working_dir=None):
+        logger.log("Running script {}".format(self.name))
         path = os.path.join(os.getcwd(), self.executable)
-        result = subprocess.Popen([path, *args],
-                                  stderr=subprocess.STDOUT)
-        result.wait()
-        logger.log(f"Script exited with code {result.returncode}", "WARNING" if result.returncode != 0 else "INFO")
-        return result.returncode
+        self.process = subprocess.Popen([path, *args],
+                                        stdin=self.input_binding,
+                                        stdout=self.output_binding,
+                                        stderr=self.err_binding)
+        return self.process
+
+    def poll(self):
+        if self.process is None:
+            raise ValueError("Process was not started")
+        return self.process.poll()
+
+    def wait(self):
+        if self.process is None:
+            raise ValueError("Process was not started")
+        return self.process.wait()
 
     def __str__(self):
         return self.name
 
+
 def split_arguments(args, sep="@"):
-    L=[]
+    L = []
     L.append([])
     for arg in args:
-        if arg==sep:
+        if arg == sep:
             L.append([])
         else:
             L[-1].append(arg)
+    if len(L) != 3:
+        raise RuntimeError("Usage: <testfile> @ <interaction_script> @ <solution_script>")
     return L
+
 
 def main(args):
     global logger
     logger = init_logger()
-    testfile, interaction_script, solution_script=  split_arguments(args,sep="@")
+
+
+
+    if os.getenv("NDEBUG") is not None:
+        os.unsetenv("DEBUG")
+    elif os.getenv("DEBUG") is None:
+        os.putenv("DEBUG", "interaction.txt")
+
+    if os.path.exists("interaction.txt"):
+        os.remove("interaction.txt")
+
+
+    testfile, interaction_script, solution_script = split_arguments(args, sep="@")
     if len(testfile) != 1:
         raise ValueError("Exactly one test file must be specified")
-    testfile = testfile[0]
-    subprocess.PIPE
+    interactor_path, *interactor_args = interaction_script
+    interactor_args = interactor_args + testfile
+    solution_path, *solution_args = solution_script
+    pipe = BidirectionalPipe()
+    interactor = Executable("Interactor", interactor_path, pipe[BidirectionalPipe.DR], pipe[BidirectionalPipe.RW])
+    solution = Executable("Solution", solution_path, pipe[BidirectionalPipe.RR], pipe[BidirectionalPipe.DW])
+    interactor.run(*interactor_args)
+    solution.run(*solution_args)
+    interactor.wait()
+    solution.wait()
+
+
 if __name__ == "__main__":
     main(sys.argv[1:])
