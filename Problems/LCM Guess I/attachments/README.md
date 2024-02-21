@@ -10,20 +10,35 @@ We have provided implementations in all supported programming languages.
 
 We have made interactors in Bash as well in all supported programming languages:
 
-| Interactor | Language | Source | Execution |
+| Interactor | Language | Source | Operating System |
 | ---- | ---- | ---- | ---- |
-| <code><span class="interaction-subcommand">bin/interactor.sh</span></code> | Bash |  | `./bin/interactor.sh TEST_FILE` |
-| <code><span class="interaction-subcommand">bin/cinteractor</span></code> | C | <code><span class="interaction-src">src/interactor.c</span></code> | `./bin/cinteractor TEST_FILE` |
-| <code><span class="interaction-subcommand">bin/cxxinteractor</span></code> | C++ | <code><span class="interaction-src">src/interactor.cpp</span></code> | `./bin/cxxinteractor TEST_FILE` |
-| <code><span class="interaction-subcommand">bin/interactor.jar</span></code> | Java | <code><span class="interaction-src">src/interactor.java</span></code> | `java -jar ./bin/interactor.jar TEST_FILE` |
-| <code><span class="interaction-subcommand">bin/interactor.py</span></code> | Python |  | `python /bin/interactor.py TEST_FILE` |
+| <code><span class="interaction-subcommand">bin/interactor.sh</span></code> | Bash | Same File | Linux |
+| <code><span class="interaction-subcommand">bin/interactor.py</span></code> | Python | Same File | Windows, Linux |
+| <code><span class="interaction-subcommand">bin/cinteractor</span></code> | C | <code><span class="interaction-src">src/interactor.c</span></code> | Linux |
+| <code><span class="interaction-subcommand">bin/cxxinteractor</span></code> | C++ | <code><span class="interaction-src">src/interactor.cpp</span></code> | Linux |
+| <code><span class="interaction-subcommand">bin/interactor.jar</span></code> | Java | <code><span class="interaction-src">src/interactor.java</span></code> | Windows, Linux |
+| <code><span class="interaction-subcommand">bin/cinteractor.exe</span></code> | C | <code><span class="interaction-src">src/interactor.c</span></code> | Windows |
+| <code><span class="interaction-subcommand">bin/cxxinteractor.exe</span></code> | C++ | <code><span class="interaction-src">src/interactor.cpp</span></code> | Windows |
 
-
-> For C and C++. We have provided binaries for **Linux.** If the binary does not work under your platform, you can regenerate the desired interactor by compiling the source code.  
+> For C and C++. We have provided binaries for **both** Linux and Windows under the `x86_64` architecture.
+> 
+> If the binary does not work under your platform, you can regenerate the desired interactor by recompiling the source code under the directory `src`.
 ## 2.2 Interaction
 **To quickly setup interaction: See the example corresponding to your Programming Language.**
 
-To test your solution, you have to compile your application (if applicable) and start the following command
+To test your solution, you have to compile your application (if applicable) and start the interaction.
+### 2.2.1 Windows
+<div style="font-size:11pt">
+<pre>
+<code>
+<span class="interaction-command">python ./start_interaction.py</span> <span class="interaction-test">TEST_FILE</span> <span class="interaction-sep">@</span> <span class = "interaction-subcommand">INTERACTOR</span>  ARGS... <span class="interaction-sep">@</span> <span class="interaction-subcommand">EXECUTABLE</span> ARGS...
+</code>
+</pre>
+</div>
+
+### 2.2.2 Linux
+
+In Linux, you **can** use the command provided in the Windows section, or use:
 <div style="font-size:11pt">
 <pre>
 <code>
@@ -31,20 +46,26 @@ To test your solution, you have to compile your application (if applicable) and 
 </code>
 </pre>
 </div>
-Where: 
+
+### 2.2.3 Arguments
+
+In both cases, the arguments are as follows: 
 
 - <span class="interaction-test" style="font-size:small">TEST_FILE</span>  is the name of the test file, examples are found in the `example` directory. If you want to read from standard input, put dash: <code><span class="interaction-stdin">-</span></code>.
 
-- <span class="interaction-subcommand" style="font-size:small">INTERACTOR</span>  is the name of the interactor. We **recommend** <code><span class="interaction-subcommand" style="font-size:11pt">./bin/interactor.sh</span></code> for simplicity. Otherwise, choose the interactor matching your preference. The interactor and your solution **do not have** to be in the same programming language.
+- <span class="interaction-subcommand" style="font-size:small">INTERACTOR</span>  is the name of the interactor. We **recommend** <code><span class="interaction-subcommand" style="font-size:11pt">./bin/interactor.py</span></code> for simplicity. Otherwise, choose the interactor matching your preference. The interactor and your solution **do not have** to be in the same programming language.
 
 - <span class="interaction-subcommand" style="font-size:small">EXECUTABLE</span>  is the name of your application.
 
+## 2.3 Programming Languages
+The <span class="interaction-subcommand" style="font-size:small">EXECUTABLE</span> variable depend on **your solution's** programming language as follows:
+
 | Solution Language | Interaction | Notes |
 | ---- | ---- | ---- |
-| C / C++ | - <span class="interaction-subcommand" style="font-size:small">EXECUTABLE</span> should be the path of the solution<br>- ARGS... should be empty  | You should first compile your solution to an executable. |
+| C / C++ | - <span class="interaction-subcommand" style="font-size:small">EXECUTABLE</span> should be the path of the solution<br>- ARGS... should be empty  | You should first compile your solution to an executable.<br> |
 | Java | - <span class="interaction-subcommand" style="font-size:small">EXECUTABLE</span> should be `java`<br>- ARGS... should be equal to the path of the java class | You should first compile your solution to a java class. |
 | Python | - <span class="interaction-subcommand" style="font-size:small">EXECUTABLE</span> should be `python`<br>- ARGS... should be equal to the path of the java class |  |
-## 2.3 What does it do?
+## 2.4 What does it do?
 The script will simulate the interaction process, and output the verdict. It will also **generate** a file called <span class="interaction-test">interaction.txt</span> that details the interaction process. As an example:
 
 <div class="interaction">
@@ -67,7 +88,7 @@ Found:    1 1 5 3
 </code></pre>
 </div>
 
-**If there is an error in the <code><span class="interaction-command" style="font-size:11pt">start_interaction.sh</span></code> script. Please send a clarification to the Judges.**
+**If there is an unexpected error in the <code><span class="interaction-command" style="font-size:11pt">start_interaction.sh</span></code> script. Please send a clarification to the Judges.**
 
 # 3. Examples
 **Each section shows how to start an interaction depending in the programming language of your solution**.
@@ -114,7 +135,7 @@ Found:    1 1 5 3
 </code>
 </pre>
 </div>
-2. Start a compiled Java solution with the name `solution.class` and read standard input. Interactor is `interactor.jar`
+2. Start a compiled Java solution with the name `solution.class` and read standard input. Interactor is <code><span class="interaction-subcommand" style="font-size:11pt">./bin/interactor.jar</span></code>
 <div class="interaction" style="font-size:11pt">
 <pre>
 <code>
@@ -122,12 +143,3 @@ Found:    1 1 5 3
 </code>
 </pre>
 </div>
-# 4. FAQ
-If you have a Permission access denied error, you may need to give the files the permission to executed:
-```bash
-chmod u+x start_interaction.sh bin/interactor.sh
-```
-You may also need to do the same for your solution executable:
-```bash
-chmod u+x ./solution
-```
